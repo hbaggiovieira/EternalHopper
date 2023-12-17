@@ -8,6 +8,7 @@ public class PlayHUD : MonoBehaviour
     public TextMeshProUGUI scoreTxt;
     public Button resumeBtn;
     public Button quitBtn;
+    public Button retryBtn;
 
     public GameObject pausePanel;
 
@@ -17,9 +18,11 @@ public class PlayHUD : MonoBehaviour
 
         resumeBtn.onClick.RemoveAllListeners();
         quitBtn.onClick.RemoveAllListeners();
+        retryBtn.onClick.RemoveAllListeners();
 
         resumeBtn.onClick.AddListener(ResumeClick);
         quitBtn.onClick.AddListener(QuitClick);
+        retryBtn.onClick.AddListener(RetryClick);
     }
 
     private void Update()
@@ -36,6 +39,11 @@ public class PlayHUD : MonoBehaviour
     private void ResumeClick()
     {
         GameManager.Instance.UnpauseGame();
+    }
+
+    private void RetryClick()
+    {
+        GameManager.Instance.RestartGame();
     }
 
     private void QuitClick()

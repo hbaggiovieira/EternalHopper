@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +53,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         isGamePaused = false;
+    }
+
+    public void RestartGame()
+    {
+        UnpauseGame();
+        Score = 0;
+        SceneManager.LoadScene("Play");
     }
 
     public void QuitGame()
