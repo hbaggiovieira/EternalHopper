@@ -1513,11 +1513,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 404906, guid: b6ed95875921a1f4f9c6f17b9f812b11, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 404906, guid: b6ed95875921a1f4f9c6f17b9f812b11, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 404906, guid: b6ed95875921a1f4f9c6f17b9f812b11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1599,11 +1599,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12aa90fdcfee5654bbcbff76fff62b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 35
+  moveForce: 25
   maxSpeed: 15
-  baseJumpVelocity: 14
-  jumpSpeedMultiplier: 0.4
-  fallMultiplier: 6
+  baseJumpVelocity: 11
+  jumpSpeedMultiplier: 0.5
+  fallMultiplier: 3
   lowJumpMultiplier: 3
   brakeForce: 10
   jumpSound: {fileID: 1754963321}
@@ -2121,7 +2121,6 @@ MonoBehaviour:
   - {fileID: 8522461642084199466, guid: 77a8cc00f14e7b5449513ee8b947bb99, type: 3}
   - {fileID: 8522461642084199466, guid: 90625a1991534b640b3f996aa487a7f5, type: 3}
   - {fileID: 8522461642084199466, guid: 804c29ac5deed2842b8d06c5c65f06b4, type: 3}
-  - {fileID: 8522461642084199466, guid: b2edd5ded86468c439d8608ac92f917b, type: 3}
   - {fileID: 8522461642084199466, guid: 13dd8d4195edd40439d0a1a278e757c0, type: 3}
   - {fileID: 8522461642084199466, guid: 8f19aa4d81c3e81449b77f02532b438d, type: 3}
   - {fileID: 8522461642084199466, guid: ef809167bffc0ba48abf07e748611725, type: 3}
@@ -2276,7 +2275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2006329834
 Transform:
   m_ObjectHideFlags: 0

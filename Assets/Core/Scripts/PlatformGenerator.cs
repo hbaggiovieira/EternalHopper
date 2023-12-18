@@ -17,11 +17,11 @@ public class PlatformGenerator : MonoBehaviour
     public float generationThreshold = 15.0f;
 
     private int levelUpPlatformConstant = 50;
-    private float initialPlatformWidthPercent = 50f;
-    private const float minWidthPercent = 5f;
+    private float initialPlatformWidthPercent = 30;
+    private const float minWidthPercent = 10f;
     private const float decrementPercent = 3f;
 
-    private float verticalDistance = 4f;
+    private float verticalDistance = 3f;
     private const float verticalIncrement = 0.1f;
 
     void Start()
