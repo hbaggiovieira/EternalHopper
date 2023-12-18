@@ -1625,7 +1625,7 @@ GameObject:
   - component: {fileID: 1485781289}
   - component: {fileID: 1485781288}
   m_Layer: 5
-  m_Name: HeightTxt
+  m_Name: FloorTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Height: 0m'
+  m_text: 'Floor: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10b83c7df2197c64885eec7ed5796de2, type: 2}
   m_sharedMaterial: {fileID: 344470796368127762, guid: 10b83c7df2197c64885eec7ed5796de2, type: 2}

@@ -36,8 +36,8 @@ public class PlayHUD : MonoBehaviour
 
     private void FixedUpdate()
     {
-        scoreTxt.text = $"Score: {GameManager.Instance.Score * 10}";
-        heightTxt.text = $"Height: {GameManager.Instance.Score}m";
+        scoreTxt.text = $"Score: {GameManager.Instance.Floor * 10}";
+        heightTxt.text = $"Floor: {GameManager.Instance.Floor}";
     }
 
     private void ResumeClick()

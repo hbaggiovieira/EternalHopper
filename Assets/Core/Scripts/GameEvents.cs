@@ -5,7 +5,7 @@ public static class GameEvents
 
     public static void TriggerEndGameEvent()
     {
-        Highscores.SaveHighscore(GameManager.Instance.Score);
+        Highscores.SaveHighscore(GameManager.Instance.Floor);
 
         OnEndGame?.Invoke();
     }

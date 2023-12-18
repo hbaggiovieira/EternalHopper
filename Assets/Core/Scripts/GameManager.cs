@@ -2,13 +2,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{
-    public int Score { get; set; }
+{ 
+    [HideInInspector]
+    public int Floor { get; set; }
+    
+    [HideInInspector]
     public int ComboCounter { get; set; } = 0;
+
+    [HideInInspector]
+    public float CameraSpeed { get; private set; } = 5f;
+    private const float CameraSpeedRaiseConstant = 1f;
 
     public static GameManager Instance { get; private set; }
 
     public bool isGamePaused { get; private set; } = false;
+
+    [HideInInspector]
+    public int LevelUpPlatformConstant { get; private set; } = 100;
+
 
     private void Awake()
     {
@@ -26,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Score = 0;
+        Floor = 0;
     }
 
     private void Update()
@@ -59,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         UnpauseGame();
-        Score = 0;
+        Floor = 0;
         SceneManager.LoadScene("Play");
     }
 
@@ -70,5 +81,10 @@ public class GameManager : MonoBehaviour
 #else
     Application.Quit();
 #endif
+    }
+
+    public void RaiseCameraSpeed()
+    {
+        CameraSpeed += CameraSpeedRaiseConstant;
     }
 }

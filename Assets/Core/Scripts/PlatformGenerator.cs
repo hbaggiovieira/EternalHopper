@@ -16,8 +16,6 @@ public class PlatformGenerator : MonoBehaviour
     public int initialPlatformBuffer = 20;
     public float generationThreshold = 15.0f;
 
-    private int levelUpPlatformConstant = 50;
-
     private const float minPlatformWidthPercent = 20f;
     private const float maxPlatformWidthPercent = 30f;
 
@@ -58,14 +56,18 @@ public class PlatformGenerator : MonoBehaviour
 
     private void GeneratePlatform()
     {
-        bool isLevelUpPlatform = platformCount % levelUpPlatformConstant == 0 && platformCount != 0;
+        bool isLevelUpPlatform = platformCount % GameManager.Instance.LevelUpPlatformConstant == 0 && platformCount != 0;
 
         if (isLevelUpPlatform)
         {
             currentLevel++;
             verticalDistance += verticalIncrement;
 
-            currentPrefabIndex = (platformPrefabs.Count > currentPrefabIndex + 1) ? currentPrefabIndex + 1 : 0;
+            if (currentPrefabIndex < platformPrefabs.Count - 1)
+            {
+                GameManager.Instance.RaiseCameraSpeed();
+                currentPrefabIndex++;
+            }
         }
 
         GameObject platformPrefab = platformPrefabs[currentPrefabIndex];
@@ -81,6 +83,13 @@ public class PlatformGenerator : MonoBehaviour
         }
 
         GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+
+        PlatformData platformData = newPlatform.GetComponent<PlatformData>();
+        if (platformData != null)
+        {
+            platformData.floorLevel = platformCount;
+        }
+
 
         BoxCollider2D platformCollider = newPlatform.GetComponent<BoxCollider2D>();
         platformCollider.size = new Vector2(newWidth, platformCollider.size.y);

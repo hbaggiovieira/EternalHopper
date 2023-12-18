@@ -25,7 +25,7 @@ public class HighscoresHUD : MonoBehaviour
         {
             if (i < highscoreList.highscores.Count)
             {
-                highscoreTexts[i].text = $"{i + 1}. {highscoreList.highscores[i]}";
+                highscoreTexts[i].text = $"{i + 1}. {highscoreList.highscores[i] * 10}";
             }
             else
             {
@@ -36,7 +36,7 @@ public class HighscoresHUD : MonoBehaviour
 
     private void CloseClick()
     {
-        GameManager.Instance.Score = 0;
+        GameManager.Instance.Floor = 0;
         SceneManager.LoadScene("Title");
     }
 }

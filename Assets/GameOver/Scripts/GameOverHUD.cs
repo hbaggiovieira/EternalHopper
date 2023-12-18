@@ -14,7 +14,7 @@ public class GameOverHUD : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            textScore.text = $"Score: {GameManager.Instance.Score}";
+            textScore.text = $"Score: {GameManager.Instance.Floor * 10}";
         }
 
         tryAgainBtn.onClick.RemoveAllListeners();
@@ -29,7 +29,7 @@ public class GameOverHUD : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.Score = 0;
+            GameManager.Instance.Floor = 0;
         }
 
         SceneManager.LoadScene("Play");
