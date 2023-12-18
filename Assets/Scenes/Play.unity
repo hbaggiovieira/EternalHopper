@@ -2033,6 +2033,7 @@ MonoBehaviour:
   - {fileID: 8522461642084199466, guid: c5de6f3eabfa3f04c9990e22e1056970, type: 3}
   - {fileID: 8522461642084199466, guid: 229063d01c4373f45ba8b84d03d842ec, type: 3}
   - {fileID: 8522461642084199466, guid: d3eff14a910b12143b17dbb9330a0cc7, type: 3}
+  - {fileID: 8522461642084199466, guid: e407410c11e7c2140b8dcd9d0576e412, type: 3}
   playerTransform: {fileID: 1754963318}
   cameraTransform: {fileID: 519420032}
   initialPlatformBuffer: 20
