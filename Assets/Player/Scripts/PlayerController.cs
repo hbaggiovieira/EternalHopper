@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     // Variáveis públicas
-    public float moveForce = 25f;
+    public float moveForce = 20f;
     public float maxSpeed = 15f;
     public float baseJumpVelocity = 11f;
-    public float jumpSpeedMultiplier = 0.5f;
+    public float jumpSpeedMultiplier = 0.4f;
     public float fallMultiplier = 3f;
-    public float lowJumpMultiplier = 3f;
+    public float lowJumpMultiplier = 4f;
     public float brakeForce = 10f;
     public AudioSource jumpSound;
     public AudioSource bounceSound;
