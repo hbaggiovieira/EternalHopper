@@ -17,12 +17,12 @@ public class PlatformGenerator : MonoBehaviour
     public float generationThreshold = 15.0f;
 
     private int levelUpPlatformConstant = 50;
-    private float initialPlatformWidthPercent = 40;
-    private const float minWidthPercent = 25f;
-    private const float decrementPercent = 3f;
 
-    private float verticalDistance = 3f;
-    private const float verticalIncrement = 0.1f;
+    private const float minPlatformWidthPercent = 20f;
+    private const float maxPlatformWidthPercent = 30f;
+
+    private float verticalDistance = 2f;
+    private const float verticalIncrement = 0f;
 
     void Start()
     {
@@ -45,7 +45,7 @@ public class PlatformGenerator : MonoBehaviour
     {
         float left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
         float right = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
-        stageWidth = right - left;
+        stageWidth = right - left -2f;
     }
 
     private void GenerateInitialPlatforms()
@@ -59,13 +59,20 @@ public class PlatformGenerator : MonoBehaviour
     private void GeneratePlatform()
     {
         bool isLevelUpPlatform = platformCount % levelUpPlatformConstant == 0 && platformCount != 0;
+
+        if (isLevelUpPlatform)
+        {
+            currentLevel++;
+            verticalDistance += verticalIncrement;
+
+            currentPrefabIndex = (platformPrefabs.Count > currentPrefabIndex + 1) ? currentPrefabIndex + 1 : 0;
+        }
+
         GameObject platformPrefab = platformPrefabs[currentPrefabIndex];
 
-        // Calcular a nova largura com base no nível atual
-        float platformWidthPercent = Mathf.Max(initialPlatformWidthPercent - (decrementPercent * (currentLevel - 1)), minWidthPercent);
-        float newWidth = isLevelUpPlatform ? stageWidth : stageWidth * platformWidthPercent / 100f;
+        float platformWidthPercent = isLevelUpPlatform ? 100f : Random.Range(minPlatformWidthPercent, maxPlatformWidthPercent);
+        float newWidth = stageWidth * platformWidthPercent / 100f;
 
-        // Instanciar a nova plataforma
         Vector3 spawnPosition = CalculateSpawnPosition(newWidth);
 
         if (platformCount == 0)
@@ -75,24 +82,15 @@ public class PlatformGenerator : MonoBehaviour
 
         GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
 
-        // Ajustar o BoxCollider2D para a nova largura
         BoxCollider2D platformCollider = newPlatform.GetComponent<BoxCollider2D>();
         platformCollider.size = new Vector2(newWidth, platformCollider.size.y);
 
-        // Ajustar o tamanho do SpriteRenderer
         AdjustSpriteRendererSize(newPlatform, newWidth);
 
         nextSpawnPosition.y += verticalDistance;
         platformCount++;
-
-        // Incrementa o nível e ajusta a distância vertical se for uma plataforma de subida de nível
-        if (isLevelUpPlatform)
-        {
-            currentLevel++;
-            verticalDistance += verticalIncrement;
-            currentPrefabIndex = (platformPrefabs.Count > currentPrefabIndex + 1) ? currentPrefabIndex + 1 : currentPrefabIndex;
-        }
     }
+
 
     private void AdjustSpriteRendererSize(GameObject platform, float newWidth)
     {
