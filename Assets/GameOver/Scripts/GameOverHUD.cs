@@ -32,7 +32,7 @@ public class GameOverHUD : MonoBehaviour
             GameManager.Instance.Score = 0;
         }
 
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Play");
     }
 
     private void HighscoresClick()
