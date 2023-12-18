@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayHUD : MonoBehaviour
 {
     public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI heightTxt;
+
     public Button resumeBtn;
     public Button quitBtn;
     public Button retryBtn;
@@ -15,6 +17,7 @@ public class PlayHUD : MonoBehaviour
     private void Awake()
     {
         scoreTxt.text = "Score: 0";
+        heightTxt.text = "Height: 0m";
 
         resumeBtn.onClick.RemoveAllListeners();
         quitBtn.onClick.RemoveAllListeners();
@@ -33,7 +36,8 @@ public class PlayHUD : MonoBehaviour
 
     private void FixedUpdate()
     {
-        scoreTxt.text = $"Score: {GameManager.Instance.Score}";
+        scoreTxt.text = $"Score: {GameManager.Instance.Score * 10}";
+        heightTxt.text = $"Height: {GameManager.Instance.Score}m";
     }
 
     private void ResumeClick()

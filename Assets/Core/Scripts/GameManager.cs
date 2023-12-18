@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int Score { get; set; }
+    public int ComboCounter { get; set; } = 0;
 
     public static GameManager Instance { get; private set; }
 
