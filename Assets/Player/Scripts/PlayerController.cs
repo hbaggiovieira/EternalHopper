@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isJumping;
     private bool canMoveHorizontally = false;
-    private bool canJump = false;
+    private bool canJump = true;
     private float jumpBufferTime = 0.2f;
     private float timeSinceJumpPressed;
     private bool jumpBuffered;
@@ -202,12 +202,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        if (
-            isGrounded &&
-            jumpBuffered &&
-            !isJumping &&
-            canJump
-            )
+        if (isGrounded && jumpBuffered && !isJumping)
         {
             PerformJump();
             jumpBuffered = false;
@@ -216,6 +211,8 @@ public class PlayerController : MonoBehaviour
 
     private void PerformJump()
     {
+        if (!canJump) return;
+        
         isGrounded = false;
         isJumping = true;
         jumpBuffered = false;

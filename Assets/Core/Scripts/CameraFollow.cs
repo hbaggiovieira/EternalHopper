@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null || !target.gameObject.activeSelf) return;
 
-        if (target.position.y < transform.position.y - 5f - Camera.main.orthographicSize && !hasFallen)
+        if (target.position.y < transform.position.y - 2f - Camera.main.orthographicSize && !hasFallen)
         {
             GameEvents.TriggerEndGameEvent();
             hasFallen = true;
