@@ -496,7 +496,6 @@ MonoBehaviour:
   scoreTxt: {fileID: 994858754}
   heightTxt: {fileID: 1485781288}
   comboTxt: {fileID: 584167989}
-  comboTextObject: {fileID: 584167987}
   resumeBtn: {fileID: 1148611990}
   quitBtn: {fileID: 1510927475}
   retryBtn: {fileID: 1343093066}
@@ -2934,7 +2933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2006329834
 Transform:
   m_ObjectHideFlags: 0
