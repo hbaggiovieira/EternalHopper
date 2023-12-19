@@ -7,6 +7,7 @@ public class PlayHUD : MonoBehaviour
 {
     public TextMeshProUGUI scoreTxt;
     public TextMeshProUGUI heightTxt;
+    public TextMeshProUGUI comboTxt;
 
     public Button resumeBtn;
     public Button quitBtn;
@@ -38,6 +39,7 @@ public class PlayHUD : MonoBehaviour
     {
         scoreTxt.text = $"Score: {GameManager.Instance.Floor * 10}";
         heightTxt.text = $"Floor: {GameManager.Instance.Floor}";
+        comboTxt.text = $"Combo: {GameManager.Instance.ComboCounter}";
     }
 
     private void ResumeClick()

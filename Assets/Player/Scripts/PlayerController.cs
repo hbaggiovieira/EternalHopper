@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     private float wallCollisionDisableTime = 0.1f;
 
+    private int previousPlatformFloorLevel;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
         UpdateJumpBuffer();
         ApplyGravity();
         CheckForFall();
-        HandleScore();
     }
 
     private void SubscribeToEvents()
@@ -65,13 +66,18 @@ public class PlayerController : MonoBehaviour
         GameEvents.OnEndGame -= HandleDeath;
     }
 
-    private void HandleScore()
+    private void HandleScore(int currentFloor)
     {
-        int height = (gameObject.transform.position.y).ConvertTo<int>();
+        GameManager.Instance.Floor = currentFloor;
 
-        if (height > GameManager.Instance.Score)
+        if (currentFloor > previousPlatformFloorLevel++)
         {
-            GameManager.Instance.Score = height;
+            GameManager.Instance.ComboCounter += currentFloor - previousPlatformFloorLevel;
+        }
+
+        if (currentFloor <= previousPlatformFloorLevel)
+        {
+            GameManager.Instance.ComboCounter = 0;
         }
     }
 
@@ -212,8 +218,7 @@ public class PlayerController : MonoBehaviour
     private void PerformJump()
     {
         if (!canJump) return;
-        
-        isGrounded = false;
+
         isJumping = true;
         jumpBuffered = false;
 
@@ -257,10 +262,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+
+        if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 0)
         {
             canMoveHorizontally = true;
             isGrounded = true;
+            HandleScore(collision.gameObject.GetComponent<PlatformData>().floorLevel);
         }
 
         if (collision.gameObject.CompareTag("Wall"))
@@ -274,6 +281,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
+            if (isGrounded)
+            {
+                previousPlatformFloorLevel = collision.gameObject.GetComponent<PlatformData>().floorLevel;
+            }
+
             isGrounded = false;
         }
     }
@@ -301,14 +313,12 @@ public class PlayerController : MonoBehaviour
 
     private void PlayFallingSound()
     {
-        Debug.Log("Attempt to PlayFallingSound");
         if (fallingSound.isPlaying)
         {
             fallingSound.Stop();
         }
         else
         {
-            Debug.Log("Attempt to PlayFallingSound");
             fallingSound.Play();
         }
     }
