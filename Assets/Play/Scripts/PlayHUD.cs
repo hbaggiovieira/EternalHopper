@@ -17,6 +17,7 @@ public class PlayHUD : MonoBehaviour
 
     private void Awake()
     {
+        comboTxt.text = "";
         scoreTxt.text = "Score: 0";
         heightTxt.text = "Height: 0m";
 
@@ -39,7 +40,22 @@ public class PlayHUD : MonoBehaviour
     {
         scoreTxt.text = $"Score: {GameManager.Instance.Floor * 10}";
         heightTxt.text = $"Floor: {GameManager.Instance.Floor}";
-        comboTxt.text = $"Combo: {GameManager.Instance.ComboCounter}";
+
+        int comboCounter = GameManager.Instance.ComboCounter;
+
+        HandleComboCounterText(comboCounter);
+    }
+
+    private void HandleComboCounterText(int comboCounter)
+    {
+        if (comboCounter <= 0)
+        {
+            comboTxt.text = "";
+        }
+        else
+        {
+            comboTxt.text = $"Combo: {comboCounter}";
+        }
     }
 
     private void ResumeClick()

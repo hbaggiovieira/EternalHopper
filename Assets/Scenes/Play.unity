@@ -496,6 +496,7 @@ MonoBehaviour:
   scoreTxt: {fileID: 994858754}
   heightTxt: {fileID: 1485781288}
   comboTxt: {fileID: 584167989}
+  comboTextObject: {fileID: 584167987}
   resumeBtn: {fileID: 1148611990}
   quitBtn: {fileID: 1510927475}
   retryBtn: {fileID: 1343093066}
@@ -822,6 +823,7 @@ GameObject:
   - component: {fileID: 584167988}
   - component: {fileID: 584167990}
   - component: {fileID: 584167989}
+  - component: {fileID: 584167991}
   m_Layer: 5
   m_Name: ComboTxt
   m_TagString: Untagged
@@ -843,11 +845,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 336656135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 1200, y: 150}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &584167989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,8 +879,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 2264924159
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5254902}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -895,8 +897,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -945,6 +947,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584167987}
   m_CullTransparentMesh: 1
+--- !u!114 &584167991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584167987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db916787aea71dd47ba986d3b823801b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmpText: {fileID: 584167989}
+  transitionTime: 0.2
 --- !u!1001 &696176012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2918,7 +2934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2006329834
 Transform:
   m_ObjectHideFlags: 0
