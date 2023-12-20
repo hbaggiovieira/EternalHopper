@@ -267,9 +267,9 @@ public class PlayerController : MonoBehaviour
 
         if (runningSpeedLevel >= 2)
         {
-            if (fastJumpingVfx != null && !fastJumpingVfx.isPlaying)
+            if (fastJumpingVfx != null)
             {
-                fastJumpingVfx.Play();
+                ResetParticleSystem();
             }
 
             if (yeahSound.isPlaying)
@@ -301,13 +301,16 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 0)
         {
-            if (fastJumpingVfx != null && fastJumpingVfx.isPlaying)
-            {
-                fastJumpingVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            }
+
 
             canMoveHorizontally = true;
             isGrounded = true;
+
+            if (fastJumpingVfx != null)
+            {
+                ResetParticleSystem(shouldStop: true);
+            }
+
             HandleScore(collision.gameObject.GetComponent<PlatformData>().floorLevel);
         }
 
@@ -316,6 +319,16 @@ public class PlayerController : MonoBehaviour
             PlayBounceSound();
             StartCoroutine(DisableMovementTemporarily());
         }
+    }
+
+    private void ResetParticleSystem(bool shouldStop = false)
+    {
+
+        if (fastJumpingVfx.isPlaying)
+            fastJumpingVfx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        if (!shouldStop)
+            fastJumpingVfx.Play();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
