@@ -2104,7 +2104,6 @@ MonoBehaviour:
   jumpSound: {fileID: 1754963321}
   bounceSound: {fileID: 1754963322}
   fallingSound: {fileID: 1754963323}
-  hopSound: {fileID: 1754963326}
   yeahSound: {fileID: 1754963325}
 --- !u!4 &1754963318 stripped
 Transform:
@@ -2439,7 +2438,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1cb024bb8ba8f5e4a8b52b45e63607a1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.7
+  m_Pitch: 0.55
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2535,7 +2534,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 518d25c96a531184cbd44de2b5aab96d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.3
+  m_Pitch: -3
   Loop: 0
   Mute: 0
   Spatialize: 0
