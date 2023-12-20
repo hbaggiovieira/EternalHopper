@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float lowJumpMultiplier = 4f;
     public float brakeForce = 10f;
 
+    public ParticleSystem fastJumpingVfx;
+
     //Audios
     public AudioSource jumpSound;
     public AudioSource bounceSound;
@@ -245,10 +247,10 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("Still_01");
         animator.SetTrigger("Jump_01");
 
-        PlayJumpSound();
+        PlayJumpSoundAndAnimation();
     }
 
-    private void PlayJumpSound()
+    private void PlayJumpSoundAndAnimation()
     {
         if (jumpSound.isPlaying)
         {
@@ -265,6 +267,11 @@ public class PlayerController : MonoBehaviour
 
         if (runningSpeedLevel >= 2)
         {
+            if (fastJumpingVfx != null && !fastJumpingVfx.isPlaying)
+            {
+                fastJumpingVfx.Play();
+            }
+
             if (yeahSound.isPlaying)
             {
                 yeahSound.Stop();
@@ -294,6 +301,11 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 0)
         {
+            if (fastJumpingVfx != null && fastJumpingVfx.isPlaying)
+            {
+                fastJumpingVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+
             canMoveHorizontally = true;
             isGrounded = true;
             HandleScore(collision.gameObject.GetComponent<PlatformData>().floorLevel);
