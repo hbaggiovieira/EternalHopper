@@ -13,9 +13,12 @@ public class PlayerController : MonoBehaviour
     public float fallMultiplier = 3f;
     public float lowJumpMultiplier = 4f;
     public float brakeForce = 10f;
+
+    //Audios
     public AudioSource jumpSound;
     public AudioSource bounceSound;
     public AudioSource fallingSound;
+    public AudioSource yeahSound;
 
     // Variáveis privadas
     private Rigidbody2D rb;
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private int facingDirection = -1;
     private float runSpeedThreshold = 10f;
     private float sprintSpeedThreshold = 14f;
+
+    private int runningSpeedLevel = 1;
 
     private float wallCollisionDisableTime = 0.1f;
 
@@ -105,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(new Vector2(moveInput * moveForce, 0));
             }
 
-            UpdateAnimationBasedOnSpeed(currentSpeed);
+            UpdateAnimationAndSpeedLevel(currentSpeed);
         }
         else
         {
@@ -118,7 +123,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateAnimationBasedOnSpeed(float speed)
+    private void UpdateAnimationAndSpeedLevel(float speed)
     {
         if (isJumping) return;
 
@@ -126,15 +131,22 @@ public class PlayerController : MonoBehaviour
 
         if (speed > 0 && speed < runSpeedThreshold)
         {
+            runningSpeedLevel = 1;
             animator.SetTrigger("Walk_01");
         }
         else if (speed >= runSpeedThreshold && speed < sprintSpeedThreshold)
         {
+            runningSpeedLevel = 2;
             animator.SetTrigger("Run_01");
         }
         else if (speed >= sprintSpeedThreshold)
         {
+            runningSpeedLevel = 3;
             animator.SetTrigger("Run_02");
+        }
+        else
+        {
+            runningSpeedLevel = 0;
         }
     }
 
@@ -241,10 +253,27 @@ public class PlayerController : MonoBehaviour
         if (jumpSound.isPlaying)
         {
             jumpSound.Stop();
+            jumpSound.Play();
         }
         else
         {
             jumpSound.Play();
+        }
+
+
+        //ToDo change audioSource for level3 sound (not yet implemented)
+
+        if (runningSpeedLevel >= 2)
+        {
+            if (yeahSound.isPlaying)
+            {
+                yeahSound.Stop();
+                yeahSound.Play();
+            }
+            else
+            {
+                yeahSound.Play();
+            }
         }
     }
 
