@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public float CameraSpeed { get; private set; } = 5f;
-    private const float CameraSpeedRaiseConstant = 1f;
+    private const float CameraSpeedRaiseConstant = 2f;
 
     public static GameManager Instance { get; private set; }
 
@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public int LevelUpPlatformConstant { get; private set; } = 100;
+
+    [HideInInspector]
+    public int RunningSpeedLevel { get; set; } = 1;
 
 
     private void Awake()

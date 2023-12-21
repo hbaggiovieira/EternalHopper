@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,8 +12,6 @@ public class PlayerController : MonoBehaviour
     public float fallMultiplier = 3f;
     public float lowJumpMultiplier = 4f;
     public float brakeForce = 10f;
-
-    public ParticleSystem fastJumpingVfx;
 
     //Audios
     public AudioSource jumpSound;
@@ -35,8 +32,6 @@ public class PlayerController : MonoBehaviour
     private int facingDirection = -1;
     private float runSpeedThreshold = 10f;
     private float sprintSpeedThreshold = 14f;
-
-    private int runningSpeedLevel = 1;
 
     private float wallCollisionDisableTime = 0.1f;
 
@@ -133,22 +128,22 @@ public class PlayerController : MonoBehaviour
 
         if (speed > 0 && speed < runSpeedThreshold)
         {
-            runningSpeedLevel = 1;
+            GameManager.Instance.RunningSpeedLevel = 1;
             animator.SetTrigger("Walk_01");
         }
         else if (speed >= runSpeedThreshold && speed < sprintSpeedThreshold)
         {
-            runningSpeedLevel = 2;
+            GameManager.Instance.RunningSpeedLevel = 2;
             animator.SetTrigger("Run_01");
         }
         else if (speed >= sprintSpeedThreshold)
         {
-            runningSpeedLevel = 3;
+            GameManager.Instance.RunningSpeedLevel = 3;
             animator.SetTrigger("Run_02");
         }
         else
         {
-            runningSpeedLevel = 0;
+            GameManager.Instance.RunningSpeedLevel = 0;
         }
     }
 
@@ -247,10 +242,19 @@ public class PlayerController : MonoBehaviour
         animator.ResetTrigger("Still_01");
         animator.SetTrigger("Jump_01");
 
-        PlayJumpSoundAndAnimation();
+        if (GameManager.Instance.RunningSpeedLevel <= 1)
+        {
+            PlayJumpSound();
+        }
+
+        if (GameManager.Instance.RunningSpeedLevel >= 2)
+        {
+            PlayYeahSound();
+        }
+
     }
 
-    private void PlayJumpSoundAndAnimation()
+    private void PlayJumpSound()
     {
         if (jumpSound.isPlaying)
         {
@@ -261,26 +265,18 @@ public class PlayerController : MonoBehaviour
         {
             jumpSound.Play();
         }
+    }
 
-
-        //ToDo change audioSource for level3 sound (not yet implemented)
-
-        if (runningSpeedLevel >= 2)
+    private void PlayYeahSound()
+    {
+        if (yeahSound.isPlaying)
         {
-            if (fastJumpingVfx != null)
-            {
-                ResetParticleSystem();
-            }
-
-            if (yeahSound.isPlaying)
-            {
-                yeahSound.Stop();
-                yeahSound.Play();
-            }
-            else
-            {
-                yeahSound.Play();
-            }
+            yeahSound.Stop();
+            yeahSound.Play();
+        }
+        else
+        {
+            yeahSound.Play();
         }
     }
 
@@ -302,15 +298,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform") && rb.velocity.y <= 0)
         {
 
-
             canMoveHorizontally = true;
             isGrounded = true;
-
-            if (fastJumpingVfx != null)
-            {
-                ResetParticleSystem(shouldStop: true);
-            }
-
             HandleScore(collision.gameObject.GetComponent<PlatformData>().floorLevel);
         }
 
@@ -319,16 +308,6 @@ public class PlayerController : MonoBehaviour
             PlayBounceSound();
             StartCoroutine(DisableMovementTemporarily());
         }
-    }
-
-    private void ResetParticleSystem(bool shouldStop = false)
-    {
-
-        if (fastJumpingVfx.isPlaying)
-            fastJumpingVfx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
-        if (!shouldStop)
-            fastJumpingVfx.Play();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
